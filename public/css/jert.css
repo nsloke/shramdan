@@ -1,0 +1,188 @@
+.xtccent{
+    vertical-align: center;
+}
+
+#summernote2{
+    display: none !important;
+}
+
+
+#summernotepreview{
+    display: none !important;
+}
+
+#summernote1{
+    display: none !important;
+}
+
+.optionvsmnote {
+    display: none !important;
+}
+
+#option1 {
+    display: none !important;
+}
+
+#option2 {
+    display: none !important;
+}
+
+#option3 {
+    display: none !important;
+}
+
+#option4 {
+    display: none !important;
+}
+
+#option5 {
+    display: none !important;
+}
+
+#ansexp {
+    display: none !important;
+}
+
+#summernoteinstr {
+    display: none !important;
+}
+
+.bstreeview .list-group-item .question-preview{
+    margin-bottom: 10px;
+    border: 1px dashed lightgray;
+    padding: 0px 7px;
+    color:#000;
+    
+}
+
+.bstreeview .list-group-item .btn{
+    font-size: 10px;
+}
+.bstreeview .list-group-item select{
+    font-size: 12px;
+    border-radius: 0px;
+}
+.bstreeview .list-group-item .form-control{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.bstreeview .list-group-item .btn{
+    border-radius: 0px;
+}
+.bstreeview .list-group-item .action-btns{
+    text-align: right;
+}
+.bstreeview .list-group-item .filter-btn{
+    text-align: right;
+}
+.bstreeview > .list-group-item{
+    color: #00000078;
+    background: #b8e5ff;
+}
+/* .bstreeview > .list-group-item + */
+
+.bstreeview > .list-group-item + .list-group > .list-group-item{
+    color: #00000078;
+    background: #caffe2;
+}
+
+.bstreeview > .list-group-item + .list-group > .list-group-item + .list-group > .list-group-item{
+    color: #00000078;
+    background: #ffc8b8;
+}
+
+.bstreeview > .list-group-item + .list-group > .list-group-item + .list-group > .list-group-item + .list-group > .list-group-item{
+    color: #00000078;
+    background: #f4ffb8;
+}
+
+
+
+
+
+
+.question{
+    margin: 20px;
+    border: 1px inset;
+    padding: 5px;
+    color:#000;
+    font-weight: 700;
+}
+
+.question-view-container{
+    margin: 10px;   
+}
+.question-view-container .option-box{
+    margin: 10px;
+    border: 1px solid  lightgray;
+    color:#000;
+    padding: 20px;
+}
+.question-view-container .option-box h6{
+    border-bottom: 1px dashed  lightgray;
+    padding-bottom: 10px;
+    color:#000;
+}
+
+#relationpane, #unarypane, #setopspane ,#functionspane {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    /* flex-direction: initial; */
+    align-items: flex-start;
+}
+ #unarypane button{
+    width: 130px !important;
+    height: 40px !important;
+    background-size: contain !important;
+    margin: 7px 10px !important;
+    max-width: 128px !important;
+    min-width: 128px !important;
+}
+#relationpane button{
+    width: 130px !important;
+    height: 40px !important;
+    background-size: contain !important;
+    margin: 7px 10px !important;
+    max-width: 128px !important;
+    min-width: 128px !important;
+} 
+
+#setopspane button{
+    width: 130px !important;
+    height: 40px !important;
+    background-size: contain !important;
+    margin: 7px 10px !important;
+    max-width: 128px !important;
+    min-width: 128px !important;
+} 
+
+#functionspane button{
+    width: 130px !important;
+    height: 40px !important;
+    background-size: contain !important;
+    margin: 7px 10px !important;
+    max-width: 128px !important;
+    min-width: 128px !important;
+} 
+#equation{
+    width: 100%;
+    height: 120px;
+}
+.editor-extra-sec{
+    margin-bottom: 10px;
+}
+.editor-extra-sec label{
+    width:32.3333%;
+}
+.editor-extra-sec .eq-btn{
+    width:32.3333%;
+    border-radius: 0px;
+    padding:0px;
+}
+.editor-extra-sec .pr-btn{
+    width:32.3333%;
+    border-radius: 0px;
+    padding:0px;
+}
