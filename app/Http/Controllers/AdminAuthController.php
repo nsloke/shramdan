@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class AdminAuthController extends Controller
 {
-    
+
     public static function generateRandomString(int $n=0)
     {
     $al = ['a','b','c','d','e','f','g','h','i','j','k'
@@ -20,6 +20,7 @@ class AdminAuthController extends Controller
     'F','G','H','I','J','K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     '0', '2', '3', '4', '5', '6', '7', '8', '9'];
+
 
     $len = !$n ? random_int(7, 12) : $n; // Chose length randomly in 7 to 12
 
@@ -53,7 +54,7 @@ class AdminAuthController extends Controller
                     return redirect('/home');
                 }
                 else {
-                    
+
                     echo '<script> alert("Username or Passwords do not match")</script>';
                     return redirect('/admin');
                     //die();
@@ -62,11 +63,11 @@ class AdminAuthController extends Controller
         else {
             echo '<script> alert("Username or Passwords do not match")</script>';
             return redirect('/admin');
-           
+
         }
 
 
-        
+
 
     }
 
@@ -146,7 +147,7 @@ class AdminAuthController extends Controller
 
 
 
-    public function logoutAdmin(Request $request) { 
+    public function logoutAdmin(Request $request) {
         Cookie::forget('userid');
         return redirect('/admin');
     }
