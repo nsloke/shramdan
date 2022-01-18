@@ -8,6 +8,7 @@ use App\Http\Controllers\EquipmentsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ShramdataController;
+use App\Http\Controllers\WorksController;
 
 /*
 |--------------------------------------------------------------------------
