@@ -29,9 +29,18 @@ Route::get('/fetchWorks',[WorksController::class,'fetchWorks']);
 
 Route::get('/fetchWorkType',[WorksController::class,'fetchWorkType']);
 
-Route::get('/fetchMaterials',[MaterialsController::class,'fetchMaterials']);
 
-Route::get('/fetchEquipments',[EquipmentsController::class,'fetchEquipments']);
+
+
+Route::get('/fetchMaterialsByType',[MaterialsController::class,'fetchMaterialsByType']);
+
+Route::get('/fetchMaterialsByWork',[MaterialsController::class,'fetchMaterialsByWork']);
+
+
+
+Route::get('/fetchEquipmentsByType',[EquipmentsController::class,'fetchEquipmentsByType']);
+
+Route::get('/fetchEquipmentsByWork',[EquipmentsController::class,'fetchEquipmentsByWork']);
 
 
 
@@ -43,4 +52,6 @@ Route::post('/saveWorkType',[WorksController::class,'saveWorkType']);
 Route::post('/saveMaterials',[MaterialsController::class,'saveMaterials']);
 
 Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipments']);
+
+
 
