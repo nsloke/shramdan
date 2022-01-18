@@ -21,7 +21,6 @@ class AdminAuthController extends Controller
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     '0', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-
     $len = !$n ? random_int(7, 12) : $n; // Chose length randomly in 7 to 12
 
     $ddd = array_map(function($a) use ($al){
