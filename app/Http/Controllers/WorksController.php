@@ -76,9 +76,9 @@ class WorksController extends Controller
          $workname=$request->post('workname');
          $worklocation=$request->post('worklocation');
          $workrequirements=$request->post('workrequirements');
-         $workstartdt=$request->post('workstartdt');
-         $workenddt=$request->post('workenddt');
-        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt`) VALUES (?,?,?,?,?,?)',[$worktypeid,$workname,$worklocation,$workrequirements,$workstartdt,$workenddt]);
+         //$workstartdt=$request->post('workstartdt');
+        // $workenddt=$request->post('');
+        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`) VALUES (?,?,?,?,)',[$worktypeid,$workname,$worklocation,$workrequirements]);
 
         if($saveWork)
        {
