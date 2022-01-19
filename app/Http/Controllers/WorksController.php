@@ -52,5 +52,13 @@ class WorksController extends Controller
     // fetch All WorkType
     public function fetchWorkType(Request $request)
     {
+        $users = DB::table('workstypetbl')->get();
+
+        return response()->json($users);
+
+       /* foreach ($users as $user)
+        {
+            var_dump($user->workstype);
+        } */
     }
 }
