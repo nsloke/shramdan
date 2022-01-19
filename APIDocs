@@ -1,0 +1,19 @@
+
+/fetchMaterialsByType
+Params:
+id: Material Type ID
+
+
+/fetchMaterialsByWork
+Params:
+id: Work ID
+
+
+/fetchEquipmentsByType
+Params:
+id: Equipment Type ID
+
+
+/fetchEquipmentsByWork
+Params:
+id: Work ID
