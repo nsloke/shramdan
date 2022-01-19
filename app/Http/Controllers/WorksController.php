@@ -61,4 +61,12 @@ class WorksController extends Controller
             var_dump($user->workstype);
         } */
     }
+
+    public function fetchWorksById(Request $request)
+    {
+        //$userid = $request->post('userid');
+         $fetchWorksById=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
+
+         return response()->json($fetchWorksById);
+    }
 }
