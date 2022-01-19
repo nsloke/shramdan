@@ -49,24 +49,45 @@ class WorksController extends Controller
 
     }
 
-    // fetch All WorkType
+     //fetch All WorkType
     public function fetchWorkType(Request $request)
     {
         $users = DB::table('workstypetbl')->get();
 
         return response()->json($users);
 
-       /* foreach ($users as $user)
-        {
-            var_dump($user->workstype);
-        } */
+
     }
+
+     //fetch Work By ID
 
     public function fetchWorksById(Request $request)
     {
-        //$userid = $request->post('userid');
+
          $fetchWorksById=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
 
          return response()->json($fetchWorksById);
+    }
+
+    //savework
+    public function saveWork(Request $request)
+    {
+         $worktypeid=$request->post('worktypeid');
+         $workname=$request->post('workname');
+         $worklocation=$request->post('worklocation');
+         $workrequirements=$request->post('workrequirements');
+         $workstartdt=$request->post('workstartdt');
+         $workenddt=$request->post('workenddt');
+        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt`) VALUES (?,?,?,?,?,?)',[$worktypeid,$workname,$worklocation,$workrequirements,$workstartdt,$workenddt]);
+
+        if($saveWork)
+       {
+         echo "Data Inserted Successfully";
+       }
+        else
+         {
+         echo "Insertion Error";
+         }
+
     }
 }
