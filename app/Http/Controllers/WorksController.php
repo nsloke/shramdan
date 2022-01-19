@@ -90,4 +90,24 @@ class WorksController extends Controller
          }
 
     }
+
+    //saveworktype
+    public function saveWorkType(Request $request)
+    {
+        $workstype=$request->post('workstype');
+        $worksdescription=$request->post('worksdescription');
+
+
+        $saveWorkType=DB::insert('INSERT INTO `workstypetbl`(`workstype`,`worksdescription`) VALUES (?,?)',[$workstype,$worksdescription]);
+
+        if($saveWorkType)
+       {
+         echo "Data Inserted Successfully";
+       }
+        else
+         {
+         echo "Insertion Error";
+         }
+
+    }
 }
