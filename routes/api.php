@@ -30,6 +30,7 @@ Route::get('/fetchWorks',[WorksController::class,'fetchWorks']);
 
 Route::get('/fetchWorkType',[WorksController::class,'fetchWorkType']);
 
+Route::get('/fetchWorksById',[WorksController::class,'fetchWorksById']);
 
 
 
@@ -42,6 +43,8 @@ Route::get('/fetchMaterialsByWork',[MaterialsController::class,'fetchMaterialsBy
 Route::get('/fetchEquipmentsByType',[EquipmentsController::class,'fetchEquipmentsByType']);
 
 Route::get('/fetchEquipmentsByWork',[EquipmentsController::class,'fetchEquipmentsByWork']);
+
+
 
 
 
