@@ -36,11 +36,11 @@ class EquipmentsController extends Controller
 
         if($saveEquipments)
         {
-            echo "Data Inserted Successfully";
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
         }
         else
          {
-         echo "Insertion Error";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
          }
 
     }

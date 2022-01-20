@@ -19,4 +19,31 @@ class MaterialsController extends Controller
         $results['data'] = DB::select("select m.materialid, m.workid, m.materialtypeid, mt.materialtypename, w.workname from materialtbl m, materialtypetbl mt, workstbl w WHERE (w.workid=m.workid AND m.materialtypeid=mt.materialtypeid AND m.workid=?)",[$request->id]);
         return $results;
     }
+
+
+
+    public function saveMaterials(Request $request)
+    {
+        $materialpid=$request->post('materialid');
+        $materialtypeid=$request->post('materialtypeid');
+        $workid=$request->post('workid');
+        $stock=$request->post('stock');
+        $remarks=$request->post('remarks');
+
+
+        $saveEquipments=DB::insert('INSERT INTO materialtbl(materialid,materialtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$materialid,$materialtypeid,$workid,$stock,$remarks]);
+
+        if($saveEquipments)
+        {
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else
+         {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+         }
+
+    }
+
+
+
 }

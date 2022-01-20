@@ -66,6 +66,14 @@ Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipments']);
 Route::post('/saveShramdataInfo',[ShramdataController::class,'saveShramdataInfo']);
 
 
+Route::post('/assignWorkShramdata',[ShramdataController::class,'assignWorkShramdata']);
+
+Route::post('/setShramdataWorkStartTime',[ShramdataController::class,'setShramdataWorkStartTime']);
+
+Route::post('/setShramdataWorkEndTime',[ShramdataController::class,'setShramdataWorkEndTime']);
+
+
+
 
 Route::post('/editWork',[WorksController::class,'editWork']);
 

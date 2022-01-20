@@ -42,9 +42,37 @@ taluka:
 image: Image File
 
 
+/saveEquipments
+METHOD:POST 
+
+/saveMaterials
+METHOD:POST
+
+
+
 /fetchShramdataWorkLogByWorkId
 workid: Work ID of the Work
 shrid: Shramdata ID of the person
+
+
+/assignWorkShramdata
+METHOD:POST
+workid:Work ID
+shrid:Shramdata ID
+
+
+/setShramdataWorkStartTime
+METHOD:POST
+workid:Work ID
+shrid:Shramdata ID
+workdate: Date OF Work
+
+
+/setShramdataWorkEndTime
+METHOD:POST
+workid:Work ID
+shrid:Shramdata ID
+workdate: Date OF Work
 
 
 /loginAdminApi
@@ -56,3 +84,5 @@ selroles: Selected Role ID
 
 /fetchAdminRoles
 No Params
+
+

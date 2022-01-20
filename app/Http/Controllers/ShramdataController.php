@@ -69,9 +69,55 @@ class ShramdataController extends Controller
         $workid=$request->post('workid');
         $shrid=$request->post('shrid');
 
-        
-        $asgnShramdatas=DB::insert('INSERT INTO `worktrackertbl`(`workid`, `shrid`, `workdate`) VALUES (?,?,?)',[$firstname,$surname,$mobno]);
 
+        $asgnShramdatas=DB::insert('INSERT INTO `worktrackertbl`(`workid`, `shrid`, `workdate`) VALUES (?,?,NOW())',[$workid,$shrid]);
+        if($asgnShramdatas==1) {
+            //echo "User Deleted Successfully.";
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else {
+            //echo "User Deletion Failed.";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+        }
+    }
+
+
+    public function setShramdataWorkStartTime(Request $request) {
+        $workid=$request->post('workid');
+        $shrid=$request->post('shrid');
+
+        $datetime=$request->post('workdate');
+        $workdate=date("Y-m-d",strtotime($datetime));
+
+
+        $workupd=DB::statement("UPDATE worktrackertbl SET checkintime=NOW() WHERE workid=? AND shrid=? AND DATE(workdate)=?",array($workid,$shrid,$workdate));
+        if($workupd==1) {
+            //echo "User Deleted Successfully.";
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else {
+            //echo "User Deletion Failed.";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+        }
+    }
+
+    public function setShramdataWorkEndTime(Request $request) {
+        $workid=$request->post('workid');
+        $shrid=$request->post('shrid');
+
+        $datetime=$request->post('workdate');
+        $workdate=date("Y-m-d",strtotime($datetime));
+
+
+        $workupd=DB::statement("UPDATE worktrackertbl SET checkouttime=NOW() WHERE workid=? AND shrid=? AND DATE(workdate)=?",array($workid,$shrid,$workdate));
+        if($workupd==1) {
+            //echo "User Deleted Successfully.";
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else {
+            //echo "User Deletion Failed.";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+        }
     }
 
 }
