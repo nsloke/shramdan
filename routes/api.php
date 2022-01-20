@@ -49,6 +49,8 @@ Route::get('/fetchEquipmentsByWork',[EquipmentsController::class,'fetchEquipment
 
 
 
+
+
 Route::post('/saveWork',[WorksController::class,'saveWork']);
 
 Route::post('/saveWorkType',[WorksController::class,'saveWorkType']);

@@ -52,9 +52,9 @@ class WorksController extends Controller
      //fetch All WorkType
     public function fetchWorkType(Request $request)
     {
-        $users = DB::table('workstypetbl')->get();
+        $works = DB::table('workstypetbl')->get();
 
-        return response()->json($users);
+        return $works;
 
 
     }
@@ -66,7 +66,7 @@ class WorksController extends Controller
 
          $fetchWorksById=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
 
-         return response()->json($fetchWorksById);
+         return $fetchWorksById;
     }
 
     //savework
