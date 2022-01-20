@@ -26,6 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+Route::get('/fetchAdminRoles',[WorksController::class,'fetchAdminRoles']);
+
+
 Route::get('/fetchWorks',[WorksController::class,'fetchWorks']);
 
 Route::get('/fetchWorkType',[WorksController::class,'fetchWorkType']);
@@ -45,9 +49,9 @@ Route::get('/fetchEquipmentsByType',[EquipmentsController::class,'fetchEquipment
 Route::get('/fetchEquipmentsByWork',[EquipmentsController::class,'fetchEquipmentsByWork']);
 
 
+Route::get('/fetchShramdataInfo',[ShramdataController::class,'fetchShramdataInfo']);
 
-
-
+Route::get('/fetchShramdataWorkLogByWorkId',[ShramdataController::class,'fetchShramdataWorkLogByWorkId']);
 
 
 
@@ -59,5 +63,21 @@ Route::post('/saveMaterials',[MaterialsController::class,'saveMaterials']);
 
 Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipments']);
 
+Route::post('/saveShramdataInfo',[ShramdataController::class,'saveShramdataInfo']);
 
+
+
+Route::post('/editWork',[WorksController::class,'editWork']);
+
+Route::post('/editWorkType',[WorksController::class,'editWorkType']);
+
+Route::post('/editMaterials',[MaterialsController::class,'editMaterials']);
+
+Route::post('/editEquipments',[EquipmentsController::class,'editEquipments']);
+
+Route::post('/editShramdataInfo',[ShramdataController::class,'editShramdataInfo']);
+
+
+
+Route::post('/loginAdminApi',[AdminAuthController::class,'loginAdminApi']);
 

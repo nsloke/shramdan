@@ -17,3 +17,42 @@ id: Equipment Type ID
 /fetchEquipmentsByWork
 Params:
 id: Work ID
+
+
+/fetchShramdataInfo
+Params:
+limits: Number of records to be fetched
+
+
+/fetchShramdataWorkLogByWorkId
+Params:
+workid=Work ID
+shrid=Shramdata ID
+
+
+/saveShramdataInfo
+Method:POST Multipart Request
+Params:
+firstname:
+surname:
+mobno:
+village:
+district:
+taluka:
+image: Image File
+
+
+/fetchShramdataWorkLogByWorkId
+workid: Work ID of the Work
+shrid: Shramdata ID of the person
+
+
+/loginAdminApi
+Method:POST
+username: Username
+password: Password
+selroles: Selected Role ID
+
+
+/fetchAdminRoles
+No Params

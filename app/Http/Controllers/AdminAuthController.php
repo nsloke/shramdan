@@ -40,11 +40,11 @@ class AdminAuthController extends Controller
 
        //echo $admInputUsername;
        //echo $admInputPassword;
-       $results = DB::select("select userId, passwd from admins where email='$admInputUsername' AND roleId=$admRoles AND status=1");
+       $results = DB::select("select userid, passwd from admins where email='$admInputUsername' AND roleId=$admRoles");
 
        //echo $results[0]->passwd;
        if(isset($results[0]->passwd)) {
-            $userId=$results[0]->userId;
+            $userId=$results[0]->userid;
             $minutes = 1440;
                 if (Hash::check($admInputPassword, $results[0]->passwd)) {
                     // The passwords match...
@@ -71,20 +71,66 @@ class AdminAuthController extends Controller
     }
 
 
+
+    public function loginAdminApi(Request $request) {
+        // dd($request->all());
+        $admInputUsername=$request->post('username');
+        $admInputPassword=$request->post('password');
+        $admRoles=$request->post('selroles');
+ 
+        //echo $admInputUsername;
+        //echo $admInputPassword;
+        $results = DB::select("select userid, passwd from admins where email='$admInputUsername' AND roleId=$admRoles");
+ 
+        //echo $results[0]->passwd;
+        if(isset($results[0]->passwd)) {
+             $userId=$results[0]->userid;
+             $minutes = 1440;
+                 if (Hash::check($admInputPassword, $results[0]->passwd)) {
+                     // The passwords match...
+                     Cookie::queue('userid',$userId,$minutes);
+                     echo "{\"error\":false ,\"msg\":\"User Authentication Successful\",\"userid\":\"".$userId."\"}";
+                     //return redirect('/home');
+                 }
+                 else {
+ 
+//                     echo '<script> alert("Username or Passwords do not match")</script>';
+                    echo "{\"error\":true ,\"msg\":\"User Authentication Failed. Passwords Mismatched\"}";  
+//return redirect('/admin');
+                     //die();
+                 }
+         }
+         else {
+            echo "{\"error\":true ,\"msg\":\"User Authentication Failed. Passwords Mismatched\"}";   
+            //            echo '<script> alert("Username or Passwords do not match")</script>';
+             //return redirect('/admin');
+ 
+         }
+ 
+ 
+ 
+ 
+     }
+
+
+
+    
+     
+
     public function saveadmusr(Request $request) {
         $useremail=$request->post('useremail');
         $username=$request->post('username');
         $password=$request->post('password');
         $admRoles=$request->post('role');
-        $masteradmin=$request->post('masteradmin');
+        //$masteradmin=$request->post('masteradmin');
 
         $opiro="9082fty90";
 
 
-        $results = DB::select("select userid from admins where username='$masteradmin'");
+       // $results = DB::select("select userid from admins where username='$masteradmin'");
 
 
-        $adminUpdate=DB::statement("INSERT INTO admins(email,username,passwd,salt,roleId,parent) VALUES(?,?,?,?,?,?)",array($useremail,$username,Hash::make($password),$opiro,$admRoles,$results[0]->userid));
+        $adminUpdate=DB::statement("INSERT INTO admins(email,username,passwd,roleId) VALUES(?,?,?,?)",array($useremail,$username,Hash::make($password),$admRoles));
         if($adminUpdate==1) {
             echo "User Created Successfully.";
         }
@@ -93,6 +139,35 @@ class AdminAuthController extends Controller
         }
 
     }
+
+
+
+
+    public function saveadmusrapi(Request $request) {
+        $useremail=$request->post('useremail');
+        $username=$request->post('username');
+        $password=$request->post('password');
+        $admRoles=$request->post('role');
+        //$masteradmin=$request->post('masteradmin');
+
+        $opiro="9082fty90";
+
+
+       // $results = DB::select("select userid from admins where username='$masteradmin'");
+
+
+        $adminUpdate=DB::statement("INSERT INTO admins(email,username,passwd,roleId) VALUES(?,?,?,?)",array($useremail,$username,Hash::make($password),$admRoles));
+        if($adminUpdate==1) {
+//            echo "User Created Successfully.";
+            echo "{\"error\":false ,\"msg\":\"User Creation Successful\"}";
+        }
+        else {
+            echo "{\"error\":false ,\"msg\":\"User Creation Failed\"}";
+        }
+
+    }
+
+
 
 
     public function delUser(Request $request) {
@@ -134,7 +209,7 @@ class AdminAuthController extends Controller
 
     public static function fetchAdminRoles() {
         //$ckuser = Cookie::get('userid');
-        $results['data'] = DB::select("select roleId, roleName from rolesTbl");
+        $results['data'] = DB::select("select roleid, roles from rolestbl");
         return $results;
     }
 
