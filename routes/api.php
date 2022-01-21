@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('/fetchAdminRoles',[WorksController::class,'fetchAdminRoles']);
+Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 
 
 Route::get('/fetchWorks',[WorksController::class,'fetchWorks']);
@@ -36,17 +36,24 @@ Route::get('/fetchWorkType',[WorksController::class,'fetchWorkType']);
 
 Route::get('/fetchWorksById',[WorksController::class,'fetchWorksById']);
 
+Route::get('/fetchWorkProgressById',[WorksController::class,'fetchWorkProgressById']);
 
+Route::get('/fetchWorkProgressByIdStatus',[WorksController::class,'fetchWorkProgressByIdStatus']);
+
+
+Route::get('/fetchAllMaterials',[MaterialsController::class,'fetchAllMaterials']);
 
 Route::get('/fetchMaterialsByType',[MaterialsController::class,'fetchMaterialsByType']);
 
 Route::get('/fetchMaterialsByWork',[MaterialsController::class,'fetchMaterialsByWork']);
 
 
+Route::get('/fetchAllEquipments',[EquipmentsController::class,'fetchAllEquipments']);
 
 Route::get('/fetchEquipmentsByType',[EquipmentsController::class,'fetchEquipmentsByType']);
 
 Route::get('/fetchEquipmentsByWork',[EquipmentsController::class,'fetchEquipmentsByWork']);
+
 
 
 Route::get('/fetchShramdataInfo',[ShramdataController::class,'fetchShramdataInfo']);
@@ -65,12 +72,17 @@ Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipments']);
 
 Route::post('/saveShramdataInfo',[ShramdataController::class,'saveShramdataInfo']);
 
+Route::post('/saveadmusrapi',[AdminAuthController::class,'saveadmusrapi']);
+
 
 Route::post('/assignWorkShramdata',[ShramdataController::class,'assignWorkShramdata']);
 
 Route::post('/setShramdataWorkStartTime',[ShramdataController::class,'setShramdataWorkStartTime']);
 
 Route::post('/setShramdataWorkEndTime',[ShramdataController::class,'setShramdataWorkEndTime']);
+
+
+Route::post('/workprogressupd',[WorksController::class,'workprogressupd']);
 
 
 

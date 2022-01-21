@@ -15,37 +15,8 @@ class WorksController extends Controller
         $informa="[";
         $informa=$informa."{";
         $iterwork=0;
-        $resultwork=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl` ");
-        if(count($resultwork))
-        {
-            $informa=$informa."\"WorkList\":[";
-        }
-
-        foreach ($resultwork as $work)
-        {
-
-            if($iterwork>0)
-            {
-                $informa=$informa.",";
-            }
-            $informa=$informa."{
-                                \"WorkID\":\"".$work->workid."\",
-                                \"WorkTypeID\":\"".$work->worktypeid."\",
-                                \"WorkName\":\"".$work->workname."\",
-                                \"WorkLocation\":\"".$work->worklocation."\",
-                                \"Workrequirements\":\"".$work->workrequirements."\",
-                                \"Workstartdt\":\"".$work->workstartdt."\",
-                                \"workenddt\":\"".$work->workenddt."\"";
-
-
-                $informa=$informa."}";
-                $iterwork=$iterwork+1;
-
-        }
-        $informa=$informa."]";
-        $informa=$informa."}";
-        $informa=$informa."]";
-        echo $informa;
+        $resultwork=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl` LIMIT ?",[$request->limits]);
+        return $resultwork;
 
     }
 
@@ -67,6 +38,23 @@ class WorksController extends Controller
          $fetchWorksById=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
 
          return $fetchWorksById;
+    }
+
+
+    public function fetchWorkProgressById(Request $request)
+    {
+
+         $fetchWorkProgress=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=?',[$request->id]);
+
+         return $fetchWorkProgress;
+    }
+
+    public function fetchWorkProgressByIdStatus(Request $request)
+    {
+
+         $fetchWorkProgress=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=? AND workstatus=?',[$request->id,$request->statuswork]);
+
+         return $fetchWorkProgress;
     }
 
     //savework
@@ -110,4 +98,48 @@ class WorksController extends Controller
          }
 
     }
+
+
+
+    public function workprogressupd(Request $request) {
+        $workid=$request->post('workid');
+        $workstatus=$request->post('status');
+
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'workimg/';
+            $workImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $workImage);
+            $input['image'] = "$workImage";
+
+            $finalpath=$destinationPath.$workImage;
+
+            $saveProgress=DB::insert('INSERT INTO `worksprogresstbl`(`workid`, `workimg`, `workstatus`) VALUES (?,?,?)',[$workid,$finalpath,$workstatus]);
+
+            if($saveProgress)
+            {
+              echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+            }
+            else
+            {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+            }
+
+
+        }else{
+            //unset($input['image']);
+           
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+            
+        }
+
+        
+
+    }
+
+
+
+
+
+
 }

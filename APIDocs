@@ -1,4 +1,16 @@
 
+/fetchWorks
+Params:
+limits: no
+
+/fetchAllEquipments
+Params:
+limits: no
+
+/fetchAllMaterials
+Params:
+limits: no
+
 /fetchMaterialsByType
 Params:
 id: Material Type ID
@@ -86,3 +98,16 @@ selroles: Selected Role ID
 No Params
 
 
+/fetchWorkProgressById
+id=Work ID
+
+/fetchWorkProgressByIdStatus
+id=Work ID
+statuswork= Pass Status for which you want to fetch image { postwork | prework | ongoing }
+
+
+/saveadmusrapi
+useremail: Email to be used as Login ID (bobhakumar@gmail.com)
+username: Name of the User (Bobha Kumar) 
+password: Password 
+role: Role ID (Use roles id, not actual value like 'admin' or 'supervisor')

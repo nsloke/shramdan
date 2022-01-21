@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 class EquipmentsController extends Controller
 {
     //
+
+    public function fetchAllEquipments(Request $request) {
+        $results['data'] = DB::select("select e.equipid, e.workid, e.eqtypeid, et.equipname, w.workname from equipmenttbl e, equipmenttypetbl et, workstbl w WHERE (w.workid=e.workid AND e.eqtypeid=et.equiptypeid) LIMIT ?",[$request->limits]);
+        return $results;
+    }
+
     public function fetchEquipmentsByType(Request $request) {
         $results['data'] = DB::select("select e.equipid, e.workid, e.eqtypeid, et.equipname, w.workname from equipmenttbl e, equipmenttypetbl et, workstbl w WHERE (w.workid=e.workid AND e.eqtypeid=et.equiptypeid AND et.equiptypeid=?)",[$request->id]);
         return $results;
