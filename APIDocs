@@ -111,3 +111,43 @@ useremail: Email to be used as Login ID (bobhakumar@gmail.com)
 username: Name of the User (Bobha Kumar) 
 password: Password 
 role: Role ID (Use roles id, not actual value like 'admin' or 'supervisor')
+
+
+/saveWork
+METHOD:POST
+worktypeid:1
+workname:Cutting Tool Test
+worklocation:Goregaon
+workrequirements:Eateries Eat
+workstartdate:25-05-2022
+workenddate:28-08-2025
+
+
+/editWork
+METHOD:POST
+workid:1
+worktypeid:1
+workname:Cutting Tool Test
+worklocation:Goregaon
+workrequirements:Eateries Eat
+workstartdate:25-05-2022 
+workenddate:28-08-2025
+
+
+
+/editWorkType
+METHOD:POST
+workstypeid:1
+workstype: Eating Wada Pav
+worksdescription: Eating Wada Pav for Good health
+
+
+/editShramdataInfo
+METHOD: POST
+shrid:1
+firstname:Johnny
+surname:Sins
+mobno:81049666492
+village:Kurdu
+district:Chiklu
+taluka:Kendulo

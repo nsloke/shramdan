@@ -59,6 +59,44 @@ class ShramdataController extends Controller
     }
 
 
+
+
+    public function editShramdataInfo(Request $request) {
+        $shrid=$request->post('shrid');
+        $firstname=$request->post('firstname');
+        $surname=$request->post('surname');
+        $mobno=$request->post('mobno');
+        $village=$request->post('village');
+        $district=$request->post('district');
+        $taluka=$request->post('taluka');
+
+
+        
+            
+
+            $saveShramdatas=DB::insert('UPDATE `shramdatastbl` SET `firstname`=?,`surname`=?,`mobno`=?,`village`=?,`taluka`=?,`district`=? WHERE shrid=?',[$firstname,$surname,$mobno,$village,$taluka,$district,$shrid]);
+
+            if($saveShramdatas)
+            {
+              echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+            }
+            else
+            {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+            }
+
+
+        
+
+        
+
+    }
+
+
+
+
+
+
     public function fetchShramdataWorkLogByWorkId(Request $request) {
         $results['data'] = DB::select("select TIMESTAMPDIFF(HOUR, wt.checkintime, wt.checkouttime) AS hours_worked from shramdatastbl st,worktrackertbl wt, workstbl w WHERE  w.workid=wt.workid AND st.shrid=wt.shrid AND wt.workid=? AND wt.shrid=?",[$request->workid,$request->shrid]);
         return $results;

@@ -64,17 +64,58 @@ class WorksController extends Controller
          $workname=$request->post('workname');
          $worklocation=$request->post('worklocation');
          $workrequirements=$request->post('workrequirements');
+         
+         $datetime1=$request->post('workstartdate');
+         $workstartdate=date("Y-m-d H:i:s",strtotime($datetime1));
+
+         $datetime2=$request->post('workenddate');
+         $workenddate=date("Y-m-d H:i:s",strtotime($datetime2));
          //$workstartdt=$request->post('workstartdt');
         // $workenddt=$request->post('');
-        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`) VALUES (?,?,?,?,)',[$worktypeid,$workname,$worklocation,$workrequirements]);
+        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt`) VALUES (?,?,?,?,?,?)',[$worktypeid,$workname,$worklocation,$workrequirements,$workstartdate,$workenddate]);
 
         if($saveWork)
        {
-         echo "Data Inserted Successfully";
+        echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
        }
         else
          {
-         echo "Insertion Error";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+         }
+
+    }
+
+
+    public function editWork(Request $request) {
+         $workid=$request->post('workid');
+         $worktypeid=$request->post('worktypeid');
+         $workname=$request->post('workname');
+         $worklocation=$request->post('worklocation');
+         $workrequirements=$request->post('workrequirements');
+
+         $datetime1=$request->post('workstartdate');
+         $workstartdate=date("Y-m-d",strtotime($datetime1));
+
+        // echo $datetime1;
+      //   echo $workstartdate."<br>";
+         $datetime2=$request->post('workenddate');
+         $workenddate=date("Y-m-d",strtotime($datetime2));
+         
+       //  echo $datetime2;
+       //  echo $workenddate."<br>";
+         //$workstartdt=$request->post('workstartdt');
+        // $workenddt=$request->post('');
+        
+        $saveWork=DB::statement('UPDATE `workstbl` SET `worktypeid`=?, `workname`=?, `worklocation`=?, `workrequirements`=?, `workstartdt`=?, `workenddt`=? WHERE workid=?',[$worktypeid,$workname,$worklocation,$workrequirements,$workstartdate,$workenddate,$workid]);
+
+        //echo $saveWork;
+        if($saveWork)
+       {
+        echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+       }
+        else
+         {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
          }
 
     }
@@ -90,15 +131,35 @@ class WorksController extends Controller
 
         if($saveWorkType)
        {
-         echo "Data Inserted Successfully";
+        echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
        }
         else
          {
-         echo "Insertion Error";
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
          }
 
     }
 
+
+    public function editWorkType(Request $request)
+    {
+        $worktypeid=$request->post('workstypeid');
+        $workstype=$request->post('workstype');
+        $worksdescription=$request->post('worksdescription');
+
+
+        $saveWorkType=DB::insert('UPDATE `workstypetbl` SET `workstype`=?,`worksdescription`=? WHERE workstypeid=?',[$workstype,$worksdescription,$worktypeid]);
+
+        if($saveWorkType)
+       {
+        echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+       }
+        else
+         {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+         }
+
+    }
 
 
     public function workprogressupd(Request $request) {
