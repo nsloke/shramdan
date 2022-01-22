@@ -63,6 +63,7 @@ METHOD:POST
 
 
 /fetchShramdataWorkLogByWorkId
+METHOD:GET
 workid: Work ID of the Work
 shrid: Shramdata ID of the person
 

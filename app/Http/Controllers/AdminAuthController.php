@@ -49,7 +49,7 @@ class AdminAuthController extends Controller
                 if (Hash::check($admInputPassword, $results[0]->passwd)) {
                     // The passwords match...
                     Cookie::queue('userid',$userId,$minutes);
-
+                    Cookie::queue('admrole',$admRoles,$minutes);
                     return redirect('/home');
                 }
                 else {

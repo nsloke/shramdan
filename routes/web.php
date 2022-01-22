@@ -23,5 +23,13 @@ Route::get('/admin', function () {
 });
 
 
+Route::get('/home', function () {
+    return view('home');
+});
+
+
 
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
+
+Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
+

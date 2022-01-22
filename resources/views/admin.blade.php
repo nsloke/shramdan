@@ -44,14 +44,14 @@
                     @csrf
                     
                     <div class="form-group">
-                        <h3 style="text-align: center;">Admin Login</h3>
+                        <h3 style="text-align: center;">प्रशासक लॉगिन</h3>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" >
+                        <input type="text" class="form-control" id="username" name="username" placeholder="वापरकर्तानाव" >
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="Password" id="password" name="password">
+                        <input type="password" class="form-control" id="password" placeholder="पासवर्ड" id="password" name="password">
                     </div>
 
                     <div class="form-group">
@@ -61,7 +61,7 @@
                     </div>
                     
                     <div class="form-group">
-                    <button type="submit" class="form-control btn btn-primary mx-auto">Submit</button>
+                    <button type="submit" class="form-control btn btn-primary mx-auto">प्रस्तुत करा</button>
                     </div>
                     
                     </form>
@@ -86,12 +86,12 @@
 
                     if(len > 0){
                         // Read data and create <option >
-                        var defaulto="<option>Select Roles</option>";
+                        var defaulto="<option>भूमिका निवडा</option>";
                         $("#selroles").append(defaulto);
                         for(var i=0; i<len; i++){
 
-                        var id = response['data'][i].roleId;
-                        var name = response['data'][i].roleName;
+                        var id = response['data'][i].roleid;
+                        var name = response['data'][i].roles;
                        
                         var option = "<option value='"+id+"'>"+name+"</option>";
                         
