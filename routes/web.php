@@ -27,9 +27,39 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('addWorkSystem', function () {
+    return view('addworksystem');
+});
+
+Route::get('deleteWorkSystem', function () {
+    return view('deleteworksystem');
+});
+
+
+Route::get('addWorkTypeSystem', function () {
+    return view('addworktypesystem');
+});
+
+Route::get('deleteWorkTypeSystem', function () {
+    return view('deleteworktypesystem');
+});
+
 
 
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 
 Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
 
+
+
+
+
+
+
+
+
+Route::post('/deleteWorkType',[WorksController::class,'deleteWorkType']);
+
+Route::post('/deleteMaterials',[MaterialsController::class,'deleteMaterials']);
+
+Route::post('/deleteEquipments',[EquipmentsController::class,'deleteEquipments']);

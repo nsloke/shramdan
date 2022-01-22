@@ -87,6 +87,16 @@ Route::post('/workprogressupd',[WorksController::class,'workprogressupd']);
 
 
 
+
+Route::post('/deleteWorkTypeApi',[WorksController::class,'deleteWorkTypeApi']);
+
+Route::post('/deleteMaterialsApi',[MaterialsController::class,'deleteMaterialsApi']);
+
+Route::post('/deleteEquipmentsApi',[EquipmentsController::class,'deleteEquipmentsApi']);
+
+
+
+
 Route::post('/editWork',[WorksController::class,'editWork']);
 
 Route::post('/editWorkType',[WorksController::class,'editWorkType']);
