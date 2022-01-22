@@ -26,6 +26,8 @@ class ShramdataController extends Controller
         $district=$request->post('district');
         $taluka=$request->post('taluka');
 
+        $supervisorid=$request->post('supervisorid');
+
 
         if ($image = $request->file('image')) {
             $destinationPath = 'profileimg/';
@@ -35,7 +37,7 @@ class ShramdataController extends Controller
 
             $finalpath=$destinationPath.$profileImage;
 
-            $saveShramdatas=DB::insert('INSERT INTO `shramdatastbl`(`firstname`, `surname`, `mobno`, `village`, `taluka`, `district`, `imgurl`) VALUES (?,?,?,?,?,?,?)',[$firstname,$surname,$mobno,$village,$taluka,$district,$finalpath]);
+            $saveShramdatas=DB::insert('INSERT INTO `shramdatastbl`(`firstname`, `surname`, `mobno`, `village`, `taluka`, `district`, `imgurl`,`supervisorid`) VALUES (?,?,?,?,?,?,?,?)',[$firstname,$surname,$mobno,$village,$taluka,$district,$finalpath,$supervisorid]);
 
             if($saveShramdatas)
             {
@@ -71,10 +73,10 @@ class ShramdataController extends Controller
         $taluka=$request->post('taluka');
 
 
-        
+        $supervisorid=$request->post('supervisorid');
             
 
-            $saveShramdatas=DB::insert('UPDATE `shramdatastbl` SET `firstname`=?,`surname`=?,`mobno`=?,`village`=?,`taluka`=?,`district`=? WHERE shrid=?',[$firstname,$surname,$mobno,$village,$taluka,$district,$shrid]);
+            $saveShramdatas=DB::insert('UPDATE `shramdatastbl` SET `firstname`=?,`surname`=?,`mobno`=?,`village`=?,`taluka`=?,`district`=?, `supervisorid`=? WHERE shrid=?',[$firstname,$surname,$mobno,$village,$taluka,$district,$shrid,$supervisorid]);
 
             if($saveShramdatas)
             {
@@ -138,6 +140,7 @@ class ShramdataController extends Controller
             echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
         }
     }
+    
 
     public function setShramdataWorkEndTime(Request $request) {
         $workid=$request->post('workid');

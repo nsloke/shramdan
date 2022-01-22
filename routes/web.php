@@ -27,6 +27,12 @@ Route::get('/home', function () {
     return view('home');
 });
 
+
+Route::get('/addSupervisorSystem', function () {
+    return view('addsupervisor');
+});
+
+
 Route::get('addWorkSystem', function () {
     return view('addworksystem');
 });
@@ -97,6 +103,9 @@ Route::get('deleteEquipmentTypeSystem', function () {
 
 
 Route::post('/logoutAdmin',[AdminAuthController::class,'logoutAdmin']);
+
+Route::get('/logout',[AdminAuthController::class,'logout']);
+
 
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 
