@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shramdan</title>
+    <title>श्रमदान</title>
 
     <!-- Custom fonts for this template-->
     
@@ -136,7 +136,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">रिपोर्ट :</h6>
-                        <a class="collapse-item" href="createuser">रिपोर्ट बनवा </a>
+                        <a class="collapse-item" href="reportmaker">रिपोर्ट बनवा </a>
                     
                         
                     </div>
@@ -227,13 +227,13 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    प्रोफाइल
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    लॉगआउट
                                 </a>
                             </div>
                         </li>

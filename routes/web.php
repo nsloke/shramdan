@@ -96,7 +96,7 @@ Route::get('deleteEquipmentTypeSystem', function () {
 
 
 
-
+Route::post('/logoutAdmin',[AdminAuthController::class,'logoutAdmin']);
 
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 

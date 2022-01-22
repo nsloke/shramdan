@@ -223,6 +223,14 @@ class AdminAuthController extends Controller
 
     public function logoutAdmin(Request $request) {
         Cookie::forget('userid');
+        Cookie::forget('admrole');
+        return redirect('/admin');
+    }
+
+
+    public function logout(Request $request) {
+        Cookie::forget('userid');
+        Cookie::forget('admrole');
         return redirect('/admin');
     }
 
