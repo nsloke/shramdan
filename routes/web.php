@@ -113,7 +113,7 @@ Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
 
 
 
-
+Route::post('/saveadmusr',[AdminAuthController::class,'saveadmusr']);
 
 
 
