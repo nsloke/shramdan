@@ -136,7 +136,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">रिपोर्ट :</h6>
-                        <a class="collapse-item" href="createuser">रिपोर्ट बनवा </a>
+                        <a class="collapse-item" href="reportmaker">रिपोर्ट बनवा </a>
                     
                         
                     </div>

@@ -65,6 +65,9 @@ Route::get('deleteMaterialTypeSystem', function () {
     return view('deletematerialtypesystem');
 });
 
+Route::get('reportmaker',function () {
+    return view('reportmakersys');
+});
 
 
 
@@ -76,6 +79,8 @@ Route::get('addEquipmentSystem', function () {
 Route::get('deleteEquipmentSystem', function () {
     return view('deleteequipmentsystem');
 });
+
+
 
 
 Route::get('addEquipmentTypeSystem', function () {
