@@ -46,6 +46,53 @@ Route::get('deleteWorkTypeSystem', function () {
 
 
 
+
+
+Route::get('addMaterialSystem', function () {
+    return view('addmaterialsystem');
+});
+
+Route::get('deleteMaterialSystem', function () {
+    return view('deletematerialsystem');
+});
+
+
+Route::get('addMaterialTypeSystem', function () {
+    return view('addMaterialTypeSystem');
+});
+
+Route::get('deleteMaterialTypeSystem', function () {
+    return view('deletematerialtypesystem');
+});
+
+
+
+
+
+Route::get('addEquipmentSystem', function () {
+    return view('addequipmentsystem');
+});
+
+Route::get('deleteEquipmentSystem', function () {
+    return view('deleteequipmentsystem');
+});
+
+
+Route::get('addEquipmentTypeSystem', function () {
+    return view('addequipmenttypesystem');
+});
+
+Route::get('deleteEquipmentTypeSystem', function () {
+    return view('deleteequipmenttypesystem');
+});
+
+
+
+
+
+
+
+
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 
 Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
