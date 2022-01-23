@@ -65,7 +65,7 @@ Route::get('deleteMaterialSystem', function () {
 
 
 Route::get('addMaterialTypeSystem', function () {
-    return view('addMaterialTypeSystem');
+    return view('addmaterialtypesystem');
 });
 
 Route::get('deleteMaterialTypeSystem', function () {
