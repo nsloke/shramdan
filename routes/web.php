@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\WorksController;
-use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\EquipmentsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ShramdataController;
+use App\Http\Controllers\MaterialsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,8 +107,13 @@ Route::get('deleteEquipmentTypeSystem', function () {
 
 
 
-Route::get('/fetchAllMaterials',[MaterialsController::class,'fetchAllMaterialsSys']);
+Route::get('/fetchAllMaterialsType',[MaterialsController::class,'fetchAllMaterialsTypeWeb']);
 
+Route::get('/fetchAllEquipmentsType',[EquipmentsController::class,'fetchAllEquipmentsTypeWeb']);
+
+
+
+Route::get('/fetchWorks',[WorksController::class,'fetchWorksSys']);
 
 
 Route::post('/logoutAdmin',[AdminAuthController::class,'logoutAdmin']);
@@ -132,9 +137,12 @@ Route::post('/saveWorkTypeWeb',[WorksController::class,'saveWorkTypeWeb']);
 
 Route::post('/saveMaterials',[MaterialsController::class,'saveMaterialsWeb']);
 
+Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipmentsWeb']);
+
 Route::post('/saveMaterialsType',[MaterialsController::class,'saveMaterialsTypeWeb']);
 
 Route::post('/saveEquipmentType',[EquipmentsController::class,'saveEquipmentTypeWeb']);
+
 
 
 

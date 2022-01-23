@@ -10,7 +10,15 @@ class MaterialsController extends Controller
     //
 
 
-    public function fetchAllMaterials(Request $request) {
+    public function fetchAllMaterialsTypeWeb(Request $request) {
+        //echo $request->id;
+        $results['data'] = DB::select("SELECT * FROM `materialtypetbl`");
+        return $results;
+       // return response()->json($results['data']);
+    }
+
+
+    public function fetchAllMaterialsType(Request $request) {
         //echo $request->id;
         $results['data'] = DB::select("select m.materialid, m.workid, m.materialtypeid, mt.materialtypename, w.workname from materialtbl m, materialtypetbl mt, workstbl w WHERE (w.workid=m.workid AND m.materialtypeid=mt.materialtypeid) LIMIT ?",[$request->limits]);
         return $results;
@@ -41,14 +49,13 @@ class MaterialsController extends Controller
 
     public function saveMaterials(Request $request)
     {
-        $materialpid=$request->post('materialid');
         $materialtypeid=$request->post('materialtypeid');
         $workid=$request->post('workid');
         $stock=$request->post('stock');
         $remarks=$request->post('remarks');
 
 
-        $saveEquipments=DB::insert('INSERT INTO materialtbl(materialid,materialtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$materialid,$materialtypeid,$workid,$stock,$remarks]);
+        $saveEquipments=DB::insert('INSERT INTO materialtbl(materialtypeid,workid,stock,remarks) VALUES (?,?,?,?)',[$materialtypeid,$workid,$stock,$remarks]);
 
         if($saveEquipments)
         {
@@ -65,14 +72,13 @@ class MaterialsController extends Controller
 
     public function saveMaterialsWeb(Request $request)
     {
-        $materialpid=$request->post('materialid');
         $materialtypeid=$request->post('materialtypeid');
         $workid=$request->post('workid');
         $stock=$request->post('stock');
         $remarks=$request->post('remarks');
 
 
-        $saveEquipments=DB::insert('INSERT INTO materialtbl(materialid,materialtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$materialid,$materialtypeid,$workid,$stock,$remarks]);
+        $saveEquipments=DB::insert('INSERT INTO materialtbl(materialtypeid,workid,stock,remarks) VALUES (?,?,?,?)',[$materialtypeid,$workid,$stock,$remarks]);
 
         if($saveEquipments)
         {

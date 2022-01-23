@@ -13,6 +13,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>श्रमदान</title>
 
     <!-- Custom fonts for this template-->
@@ -256,6 +258,77 @@
                     <!-- Content Row -->
                     
 
+                    <div class="container" style="padding-left:2.5rem; padding-right:1.5rem;">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Add Materials</h1>
+                        
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row d-sm-flex align-items-center justify-content-between">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        
+                      <div class="col-md-8">  
+                            <form method="post">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label>Select Work </label>
+                                    <select name="selwork" id="selwork" class="form-control">
+                                            
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Select Material Type </label>
+                                    <select name="selmaterial" id="selmaterial" class="form-control">
+                                            
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                <label>Stock</label>
+                                <input type="text" class="form-control" id="stocks" name="stocks" placeholder="Stocks" >
+                                </div>
+                            
+
+                                <div class="form-group">
+                                <label>Remarks</label>
+                                <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks" >
+                                </textarea>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                <button class="btn btn-primary form-control" onclick="savematerials();" >Save Materials</button>
+                                </div>
+                            </form>
+                       </div>
+                    
+                       <div class="col-md-8">
+                       <div class="table-responsive-sm" id="coursenameid">
+                        
+                        </div>
+                     </div>    
+                    
+
+                        
+
+
+                       
+
+                        
+                </div>
+
+
+
                     <!-- Content Row -->
 
                     
@@ -329,6 +402,133 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+
+
+    <script type='text/javascript'>
+
+$(document).ready(function(){
+// $('#option5').addClass("optionvsmnote");
+
+        $.ajax({
+        url: '/api/fetchWorkType',
+        type: 'get',
+        success: function(response){
+
+            var len = 0;
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+                // Read data and create <option >
+                var defaulto="<option>Select Works Type</option>";
+                $("#selwork").append(defaulto);
+                for(var i=0; i<len; i++){
+
+                var id = response['data'][i].workstypeid;
+                var name = response['data'][i].workstype;
+
+                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                $("#selwork").append(option); 
+                }
+            }
+
+        }
+        });
+
+
+        $.ajax({
+        url: '/fetchAllMaterialsType',
+        type: 'get',
+        success: function(response){
+
+            var len = 0;
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+                // Read data and create <option >
+                var defaulto="<option>Select Materials Type</option>";
+                $("#selmaterial").append(defaulto);
+                for(var i=0; i<len; i++){
+
+                var id = response['data'][i].materialtypeid;
+                var name = response['data'][i].materialtypename;
+
+                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                $("#selmaterial").append(option); 
+                }
+            }
+
+        }
+        });
+
+
+
+
+});
+</script>
+
+
+
+<script>
+
+    function savematerials() {
+        event.preventDefault();
+        var selwork=document.getElementById('selwork').value;
+        var selmaterial=document.getElementById('selmaterial').value;
+        var stocks=document.getElementById('stocks').value;
+        var remarks=document.getElementById('remarks').value;
+        
+        var urls="saveMaterials";
+        var params = 'materialtypeid='+selmaterial+"&workid="+selwork+"&stock="+stocks+"&remarks="+remarks;
+        var headers = {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        };
+
+        var tokenz=$('meta[name="csrf-token"]').attr('content');
+
+        console.log(urls);
+                if (window.XMLHttpRequest)
+                {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+                }
+                else
+                {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange=function()
+                {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                   // window.location.reload();
+                var some=xmlhttp.responseText;
+               // document.getElementById("outputinfo").innerHTML=some;
+                alert(some);
+                }
+                }
+                xmlhttp.open("POST",urls,true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xmlhttp.setRequestHeader('X-CSRF-TOKEN', tokenz);
+                xmlhttp.send(params);
+
+               // ajaxCall();
+               document.getElementById('selwork').value="";
+               document.getElementById('selmaterial').value="";
+               document.getElementById('stocks').value="";
+               document.getElementById('remarks').value="";
+
+        
+      }
+</script>
+
+
+
 
 </body>
 

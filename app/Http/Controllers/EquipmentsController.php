@@ -14,6 +14,11 @@ class EquipmentsController extends Controller
 {
     //
 
+    public function fetchAllEquipmentsTypeWeb(Request $request) {
+        $results['data'] = DB::select("SELECT `equiptypeid`, `equipname` FROM `equipmenttypetbl`");
+        return $results;
+    }
+
     public function fetchAllEquipments(Request $request) {
         $results['data'] = DB::select("select e.equipid, e.workid, e.eqtypeid, et.equipname, w.workname from equipmenttbl e, equipmenttypetbl et, workstbl w WHERE (w.workid=e.workid AND e.eqtypeid=et.equiptypeid) LIMIT ?",[$request->limits]);
         return $results;
@@ -31,14 +36,13 @@ class EquipmentsController extends Controller
 
     public function saveEquipments(Request $request)
     {
-        $equipid=$request->post('equipid');
         $eqtypeid=$request->post('eqtypeid');
         $workid=$request->post('workid');
         $stock=$request->post('stock');
         $remarks=$request->post('remarks');
 
 
-        $saveEquipments=DB::insert('INSERT INTO equipmenttbl(equipid,eqtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$equipid,$eqtypeid,$workid,$stock,$remarks]);
+        $saveEquipments=DB::insert('INSERT INTO equipmenttbl(eqtypeid,workid,stock,remarks) VALUES (?,?,?,?)',[$eqtypeid,$workid,$stock,$remarks]);
 
         if($saveEquipments)
         {
@@ -55,22 +59,21 @@ class EquipmentsController extends Controller
 
     public function saveEquipmentsWeb(Request $request)
     {
-        $equipid=$request->post('equipid');
         $eqtypeid=$request->post('eqtypeid');
         $workid=$request->post('workid');
         $stock=$request->post('stock');
         $remarks=$request->post('remarks');
 
 
-        $saveEquipments=DB::insert('INSERT INTO equipmenttbl(equipid,eqtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$equipid,$eqtypeid,$workid,$stock,$remarks]);
+        $saveEquipments=DB::insert('INSERT INTO equipmenttbl(eqtypeid,workid,stock,remarks) VALUES (?,?,?,?)',[$eqtypeid,$workid,$stock,$remarks]);
 
         if($saveEquipments)
         {
-            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+            echo "Data Inserted Successfully";
         }
         else
          {
-            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+            echo "Insertion Error";
          }
 
     }

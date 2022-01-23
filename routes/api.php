@@ -41,6 +41,8 @@ Route::get('/fetchWorkProgressById',[WorksController::class,'fetchWorkProgressBy
 Route::get('/fetchWorkProgressByIdStatus',[WorksController::class,'fetchWorkProgressByIdStatus']);
 
 
+Route::get('/fetchAllMaterialsType',[MaterialsController::class,'fetchAllMaterialsType']);
+
 Route::get('/fetchAllMaterials',[MaterialsController::class,'fetchAllMaterials']);
 
 Route::get('/fetchMaterialsByType',[MaterialsController::class,'fetchMaterialsByType']);

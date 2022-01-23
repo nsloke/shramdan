@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
     <title>श्रमदान</title>
 
@@ -254,7 +256,52 @@
                     </div>
 
                     <!-- Content Row -->
+                    <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Add Equipment Type</h1>
                     
+                </div>
+
+                <!-- Content Row -->
+                <div class="row d-sm-flex align-items-center justify-content-between">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    
+                <div class="col-md-8">  
+                        <form method="post">
+                            @csrf
+
+                            <div class="form-group">
+                            <label>Equipment Type Name</label>
+                            <input type="text" class="form-control" id="equipmenttypename" name="equipmenttypename" placeholder="Equipment Type Name" >
+                            </div>
+
+
+                           
+
+                    
+                            <div class="form-group">
+                            <button class="btn btn-primary form-control" onclick="saveequipmenttype();" >Save Equipment Type</button>
+                            </div>
+                        </form>
+                </div>
+
+                <div class="col-md-8">
+                <div class="table-responsive-sm" id="coursenameid">
+                    
+                    </div>
+                </div>    
+
+
+                    
+
+
+                
+
+                    
+                </div>
 
                     <!-- Content Row -->
 
@@ -329,6 +376,63 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+
+
+    <script>
+
+function saveequipmenttype() {
+    event.preventDefault();
+    var equipmenttypename=document.getElementById('equipmenttypename').value;
+
+   
+    var urls="saveEquipmentType";
+    var params = 'equipmenttypename='+equipmenttypename;
+    var headers = {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    };
+
+    var tokenz=$('meta[name="csrf-token"]').attr('content');
+
+    console.log(urls);
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+               // window.location.reload();
+            var some=xmlhttp.responseText;
+           // document.getElementById("outputinfo").innerHTML=some;
+            alert(some);
+            }
+            }
+            xmlhttp.open("POST",urls,true);
+            xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlhttp.setRequestHeader('X-CSRF-TOKEN', tokenz);
+            xmlhttp.send(params);
+
+           // ajaxCall();
+            document.getElementById('equipmenttypename').value="";
+            
+
+    
+  }
+</script>
+
+
+
+
+
+
+
 
 </body>
 

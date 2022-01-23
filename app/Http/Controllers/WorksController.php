@@ -10,6 +10,18 @@ use PhpParser\Node\Expr\FuncCall;
 class WorksController extends Controller
 {
     //fetch All Works
+
+    public function fetchWorksSys(Request $request)
+    {
+        $informa="[";
+        $informa=$informa."{";
+        $iterwork=0;
+        $resultwork=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`");
+        return $resultwork;
+
+    }
+
+
     public function fetchWorks(Request $request)
     {
         $informa="[";
@@ -20,6 +32,8 @@ class WorksController extends Controller
 
     }
 
+
+
      //fetch All WorkType
     public function fetchWorkType(Request $request)
     {
@@ -29,6 +43,12 @@ class WorksController extends Controller
 
 
     }
+
+
+
+    
+
+
 
      //fetch Work By ID
 
