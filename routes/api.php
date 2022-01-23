@@ -68,6 +68,8 @@ Route::post('/saveWorkType',[WorksController::class,'saveWorkType']);
 
 Route::post('/saveMaterials',[MaterialsController::class,'saveMaterials']);
 
+Route::post('/saveMaterialsType',[MaterialsController::class,'saveMaterialsType']);
+
 Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipments']);
 
 Route::post('/saveShramdataInfo',[ShramdataController::class,'saveShramdataInfo']);
