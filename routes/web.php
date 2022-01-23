@@ -134,6 +134,7 @@ Route::post('/saveMaterials',[MaterialsController::class,'saveMaterialsWeb']);
 
 Route::post('/saveMaterialsType',[MaterialsController::class,'saveMaterialsTypeWeb']);
 
+Route::post('/saveEquipmentType',[EquipmentsController::class,'saveEquipmentTypeWeb']);
 
 
 

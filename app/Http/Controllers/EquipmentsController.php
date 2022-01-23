@@ -51,4 +51,76 @@ class EquipmentsController extends Controller
 
     }
 
+
+
+    public function saveEquipmentsWeb(Request $request)
+    {
+        $equipid=$request->post('equipid');
+        $eqtypeid=$request->post('eqtypeid');
+        $workid=$request->post('workid');
+        $stock=$request->post('stock');
+        $remarks=$request->post('remarks');
+
+
+        $saveEquipments=DB::insert('INSERT INTO equipmenttbl(equipid,eqtypeid,workid,stock,remarks) VALUES (?,?,?,?,?)',[$equipid,$eqtypeid,$workid,$stock,$remarks]);
+
+        if($saveEquipments)
+        {
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else
+         {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+         }
+
+    }
+
+
+
+
+    public function saveEquipmentType(Request $request)
+    {
+        $equipmenttypename=$request->post('equipmenttypename');
+
+
+        $saveEquipmentsType=DB::insert('INSERT INTO equipmenttypetbl(equipname) VALUES (?)',[$equipmenttypename]);
+
+        if($saveEquipmentsType)
+        {
+            echo "{\"error\":false ,\"msg\":\"Data Inserted Successfully\"}";
+        }
+        else
+         {
+            echo "{\"error\":true ,\"msg\":\"Insertion Error\"}";
+         }
+
+    }
+
+
+
+
+    public function saveEquipmentTypeWeb(Request $request)
+    {
+        $equipmenttypename=$request->post('equipmenttypename');
+
+
+        $saveEquipmentsType=DB::insert('INSERT INTO equipmenttypetbl(equipname) VALUES (?)',[$equipmenttypename]);
+
+        if($saveEquipmentsType)
+        {
+            echo "Data Inserted Successfully";
+        }
+        else
+         {
+            echo "Insertion Error";
+         }
+
+    }
+
+
+
+
+
+
+
 }
