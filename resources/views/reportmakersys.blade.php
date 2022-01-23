@@ -13,6 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>श्रमदान</title>
 
     <!-- Custom fonts for this template-->
@@ -249,12 +250,63 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">डॅशबोर्ड</h1>
+                        <h1 class="h3 mb-0 text-gray-800">अहवाल निर्माता</h1>
                         
                     </div>
 
                     <!-- Content Row -->
-                    
+                    <div class="row d-sm-flex align-items-center justify-content-between">
+
+<!-- Earnings (Monthly) Card Example -->
+
+                    <div class="col-md-8">  
+                        <form method="post">
+                            @csrf
+
+                            <div class="form-group">
+                                <label>Select Work</label>
+                                <select name="selwork" id="selwork" class="form-control">
+                                        
+                                </select>
+                            </div>
+
+
+                           
+                            <div class="form-group">
+                                <label>Select Supervisor </label>
+                                <select name="selsupervisor" id="selsupervisor" class="form-control">
+                                        
+                                </select>
+                            </div>
+
+
+
+
+
+                           <!-- <div class="form-group">
+                            <button class="btn btn-primary form-control" >Save Reports</button>
+                            </div> -->
+                        </form>
+                    </div>
+
+
+
+
+                    <div class="col-md-8">
+                    <div class="table-responsive-sm" id="reportstr">
+
+                    </div>
+                    </div>    
+
+
+
+
+
+
+
+
+                    </div>
+
 
                     <!-- Content Row -->
 
@@ -329,6 +381,167 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+
+
+
+
+    <script type='text/javascript'>
+
+$(document).ready(function(){
+// $('#option5').addClass("optionvsmnote");
+
+        $.ajax({
+        url: '/fetchWorks',
+        type: 'get',
+        success: function(response){
+
+            var len = 0;
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+                // Read data and create <option >
+                var defaulto="<option>Select Works</option>";
+                $("#selwork").append(defaulto);
+                for(var i=0; i<len; i++){
+
+                var id = response['data'][i].workid;
+                var name = response['data'][i].workname;
+
+                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                $("#selwork").append(option); 
+                }
+            }
+
+        }
+        });
+
+
+
+
+        $.ajax({
+        url: '/fetchSupervisors',
+        type: 'get',
+        success: function(response){
+
+            var len = 0;
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+                // Read data and create <option >
+                var defaulto="<option>Select Supervisor</option>";
+                $("#selsupervisor").append(defaulto);
+                for(var i=0; i<len; i++){
+
+                var id = response['data'][i].userid;
+                var name = response['data'][i].email;
+
+                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                $("#selsupervisor").append(option); 
+                }
+            }
+
+        }
+        });
+
+
+
+
+        // Subject Change
+        $('#selsupervisor').change(function() {
+
+            // Subject id
+            var id = $(this).val();
+            var workid=$("#selwork").val();
+
+                // Empty the dropdown
+                //  $('#selsubject').find('option').not(':first').remove();
+
+            // AJAX request 
+            /*
+            $.ajax({
+            url: '/fetchReports?workid='+workid+'&supervisorid='+id,
+            type: 'get',
+            success: function(response){
+
+               
+
+                
+                   
+                    $("#reportstr").append(response['data']); 
+                    
+                }
+
+            
+            }); */
+
+
+
+            $.ajax({
+                    url: '/fetchReports?workid='+workid+'&supervisorid='+id,
+                    type: 'get',
+                    success: function(response){
+
+                    var len = 0;
+                    if(response['data'] != null){
+                        len = response['data'].length;
+                    }
+
+                    if(len > 0){
+                        // Read data and create <option >
+                        var option = "<table class=\"table table-bordered\"><thead><th>Work ID</th><th>Work Name</th><th>Work Hours</th><th>Shramdata ID</th><th>First Name</th><th>Surname</th></thead><tbody>";
+                        for(var i=0; i<len; i++){
+
+                        var workid = response['data'][i].workid;
+                        var workname = response['data'][i].workname;
+
+                        var workstypeid = response['data'][i].workstypeid;
+                        var workstype = response['data'][i].workstype;
+
+                        var hoursworked = response['data'][i].hours_worked;
+
+                        var shrid = response['data'][i].shrid;
+                        var firstname = response['data'][i].firstname;
+                        var surname = response['data'][i].surname;
+
+                        option += "<tr><td> "+workid+" </td><td> "+workname+" </td><td> "+hoursworked+" </td><td> "+shrid+" </td><td> "+firstname+" </td> <td> "+surname+" </td></tr>";
+
+                        
+                        }
+                        option+="</tbody></table>"
+                        $("#reportstr").html(option); 
+                    }
+
+                }
+                });
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+
+});
+</script>
+
+
+
+
+
 
 </body>
 

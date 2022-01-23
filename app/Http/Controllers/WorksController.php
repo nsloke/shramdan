@@ -16,7 +16,7 @@ class WorksController extends Controller
         $informa="[";
         $informa=$informa."{";
         $iterwork=0;
-        $resultwork=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`");
+        $resultwork['data']=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`");
         return $resultwork;
 
     }
@@ -27,7 +27,7 @@ class WorksController extends Controller
         $informa="[";
         $informa=$informa."{";
         $iterwork=0;
-        $resultwork=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl` LIMIT ?",[$request->limits]);
+        $resultwork['data']=DB::select("SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl` LIMIT ?",[$request->limits]);
         return $resultwork;
 
     }

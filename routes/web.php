@@ -106,6 +106,8 @@ Route::get('deleteEquipmentTypeSystem', function () {
 
 
 
+Route::get('/fetchReports',[ReportsController::class,'fetchReports']);
+
 
 Route::get('/fetchAllMaterialsType',[MaterialsController::class,'fetchAllMaterialsTypeWeb']);
 
@@ -114,6 +116,8 @@ Route::get('/fetchAllEquipmentsType',[EquipmentsController::class,'fetchAllEquip
 
 
 Route::get('/fetchWorks',[WorksController::class,'fetchWorksSys']);
+
+Route::get('/fetchSupervisors',[AdminAuthController::class,'fetchSupervisors']);
 
 
 Route::post('/logoutAdmin',[AdminAuthController::class,'logoutAdmin']);
@@ -124,6 +128,8 @@ Route::get('/logout',[AdminAuthController::class,'logout']);
 Route::get('/fetchAdminRoles',[AdminAuthController::class,'fetchAdminRoles']);
 
 Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
+
+
 
 
 
@@ -142,6 +148,7 @@ Route::post('/saveEquipments',[EquipmentsController::class,'saveEquipmentsWeb'])
 Route::post('/saveMaterialsType',[MaterialsController::class,'saveMaterialsTypeWeb']);
 
 Route::post('/saveEquipmentType',[EquipmentsController::class,'saveEquipmentTypeWeb']);
+
 
 
 

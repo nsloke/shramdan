@@ -220,6 +220,11 @@ class AdminAuthController extends Controller
     }
 
 
+    public function fetchSupervisors() {
+        $results['data'] = DB::select("select a.userid,a.email,a.username,r.roles,r.roleid from admins a, rolestbl r WHERE r.roleId=2 AND a.roleId=r.roleid ");
+        return $results;
+    }
+
 
     public function logoutAdmin(Request $request) {
         Cookie::forget('userid');
