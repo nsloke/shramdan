@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\WorksController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,8 +116,9 @@ Route::post('/adminLoginSubmit',[AdminAuthController::class,'loginAdmin']);
 
 Route::post('/saveadmusr',[AdminAuthController::class,'saveadmusr']);
 
+Route::post('/saveWorkWeb',[WorksController::class,'saveWorkWeb']);
 
-
+Route::post('/saveWorkTypeWeb',[WorksController::class,'saveWorkTypeWeb']);
 
 
 Route::post('/deleteWorkType',[WorksController::class,'deleteWorkType']);

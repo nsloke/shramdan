@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>श्रमदान</title>
 
@@ -25,6 +26,9 @@
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ URL::asset('/css/sb-admin-2.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -257,7 +261,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Add Course</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Work</h1>
                         
                     </div>
 
@@ -266,19 +270,49 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         
-                      <div class="col-md-4">  
-                            <form >
+                      <div class="col-md-8">  
+                            <form method="post">
                                 @csrf
 
                                 <div class="form-group">
-                                <label>Course Name</label>
-                                <input type="text" class="form-control" id="coursename" name="coursename" placeholder="Course Name" >
+                                <label>Work Name</label>
+                                <input type="text" class="form-control" id="workname" name="workname" placeholder="Work Name" >
                                 </div>
 
-                            
 
                                 <div class="form-group">
-                                <button class="btn btn-primary form-control" onclick="savework();" >Save Course</button>
+                                    <label>Work Type</label>
+                                    <select name="selworktype" id="selworktype" class="form-control">
+                                            
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                <label>Work Location</label>
+                                <input type="text" class="form-control" id="worklocation" name="worklocation" placeholder="Work Location" >
+                                </div>
+                            
+                                <div class="form-group">
+                                <label>Work Requirements</label>
+                                <textarea class="form-control" id="workrequirements" name="workrequirements" placeholder="Work Requirements" >
+                                </textarea>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Work Start Date</label>
+                                <input type="date" class="form-control" id="workstartdate" name="workstartdate" placeholder="Work Start Date" >
+                                </div>
+
+                                <div class="form-group">
+                                <label>Work End Date</label>
+                                <input type="date" class="form-control" id="workenddate" name="workenddate" placeholder="Work End Date" >
+                                </div>
+
+
+
+                                <div class="form-group">
+                                <button class="btn btn-primary form-control" onclick="savework();" >Save Work</button>
                                 </div>
                             </form>
                        </div>
@@ -372,6 +406,107 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+
+
+
+    <script type='text/javascript'>
+
+$(document).ready(function(){
+// $('#option5').addClass("optionvsmnote");
+
+        $.ajax({
+        url: '/api/fetchWorkType',
+        type: 'get',
+        success: function(response){
+
+            var len = 0;
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+                // Read data and create <option >
+                var defaulto="<option>Select Works Type</option>";
+                $("#selworktype").append(defaulto);
+                for(var i=0; i<len; i++){
+
+                var id = response['data'][i].workstypeid;
+                var name = response['data'][i].workstype;
+
+                var option = "<option value='"+id+"'>"+name+"</option>";
+
+                $("#selworktype").append(option); 
+                }
+            }
+
+        }
+        });
+});
+</script>
+
+
+
+<script>
+
+    function savework() {
+        event.preventDefault();
+        var workname=document.getElementById('workname').value;
+        var worklocation=document.getElementById('worklocation').value;
+        var workrequirements=document.getElementById('workrequirements').value;
+        var workstartdate=document.getElementById('workstartdate').value;
+        var workenddate=document.getElementById('workenddate').value;
+        var worktypeid=document.getElementById('selworktype').value;
+       
+        var urls="saveWorkWeb";
+        var params = 'workname='+workname+"&worklocation="+worklocation+"&workrequirements="+workrequirements+"&workstartdate="+workstartdate+"&workenddate="+workenddate+"&worktypeid="+worktypeid;
+        var headers = {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        };
+
+        var tokenz=$('meta[name="csrf-token"]').attr('content');
+
+        console.log(urls);
+                if (window.XMLHttpRequest)
+                {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+                }
+                else
+                {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange=function()
+                {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                   // window.location.reload();
+                var some=xmlhttp.responseText;
+               // document.getElementById("outputinfo").innerHTML=some;
+                alert(some);
+                }
+                }
+                xmlhttp.open("POST",urls,true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xmlhttp.setRequestHeader('X-CSRF-TOKEN', tokenz);
+                xmlhttp.send(params);
+
+               // ajaxCall();
+                document.getElementById('workname').value="";
+                document.getElementById('worklocation').value="";
+                document.getElementById('workrequirements').value="";
+                document.getElementById('workstartdate').value="";
+                document.getElementById('workenddate').value="";
+                document.getElementById('selworktype').value="";
+
+        
+      }
+</script>
+
+
+
+
+
 
 </body>
 

@@ -23,7 +23,7 @@ class WorksController extends Controller
      //fetch All WorkType
     public function fetchWorkType(Request $request)
     {
-        $works = DB::table('workstypetbl')->get();
+        $works['data'] = DB::table('workstypetbl')->get();
 
         return $works;
 
@@ -35,7 +35,7 @@ class WorksController extends Controller
     public function fetchWorksById(Request $request)
     {
 
-         $fetchWorksById=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
+         $fetchWorksById['data']=DB::select('SELECT `workid`, `worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt` FROM `workstbl`',[$request->id]);
 
          return $fetchWorksById;
     }
@@ -44,7 +44,7 @@ class WorksController extends Controller
     public function fetchWorkProgressById(Request $request)
     {
 
-         $fetchWorkProgress=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=?',[$request->id]);
+         $fetchWorkProgress['data']=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=?',[$request->id]);
 
          return $fetchWorkProgress;
     }
@@ -52,7 +52,7 @@ class WorksController extends Controller
     public function fetchWorkProgressByIdStatus(Request $request)
     {
 
-         $fetchWorkProgress=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=? AND workstatus=?',[$request->id,$request->statuswork]);
+         $fetchWorkProgress['data']=DB::select('SELECT `workid`, `workimg`, `workstatus` FROM `worksprogresstbl` WHERE workid=? AND workstatus=?',[$request->id,$request->statuswork]);
 
          return $fetchWorkProgress;
     }
@@ -84,6 +84,36 @@ class WorksController extends Controller
          }
 
     }
+
+
+
+    public function saveWorkWeb(Request $request)
+    {
+         $worktypeid=$request->post('worktypeid');
+         $workname=$request->post('workname');
+         $worklocation=$request->post('worklocation');
+         $workrequirements=$request->post('workrequirements');
+         
+         $datetime1=$request->post('workstartdate');
+         $workstartdate=date("Y-m-d H:i:s",strtotime($datetime1));
+
+         $datetime2=$request->post('workenddate');
+         $workenddate=date("Y-m-d H:i:s",strtotime($datetime2));
+         //$workstartdt=$request->post('workstartdt');
+        // $workenddt=$request->post('');
+        $saveWork=DB::insert('INSERT INTO `workstbl`(`worktypeid`, `workname`, `worklocation`, `workrequirements`, `workstartdt`, `workenddt`) VALUES (?,?,?,?,?,?)',[$worktypeid,$workname,$worklocation,$workrequirements,$workstartdate,$workenddate]);
+
+        if($saveWork)
+       {
+        echo "Data Inserted Successfully";
+       }
+        else
+         {
+            echo "Insertion Error";
+         }
+
+    }
+
 
 
     public function editWork(Request $request) {
@@ -139,6 +169,30 @@ class WorksController extends Controller
          }
 
     }
+
+
+
+
+    public function saveWorkTypeWeb(Request $request)
+    {
+        $workstype=$request->post('workstype');
+        $worksdescription=$request->post('worksdescription');
+
+
+        $saveWorkType=DB::insert('INSERT INTO `workstypetbl`(`workstype`,`worksdescription`) VALUES (?,?)',[$workstype,$worksdescription]);
+
+        if($saveWorkType)
+       {
+        echo "Data Inserted Successfully";
+       }
+        else
+         {
+            echo "Insertion Error";
+         }
+
+    }
+
+
 
 
     public function editWorkType(Request $request)

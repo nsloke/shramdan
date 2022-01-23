@@ -82,6 +82,7 @@
                         <a class="collapse-item" href="deleteWorkSystem">काम काढा</a>
                         <a class="collapse-item" href="addWorkTypeSystem">काम प्रकार जोडा</a>
                         <a class="collapse-item" href="deleteWorkTypeSystem">काम प्रकार काढा</a>
+                        <a class="collapse-item" href="addSupervisorSystem">पर्यवेक्षक जोडा</a>
                     </div>
                 </div>
             </li>
@@ -328,6 +329,18 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
